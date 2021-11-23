@@ -47,6 +47,42 @@ $ yarn husky install
 $ chmod 777 '.husky/pre-push'
 ```
 
+### Set up environment
+Copy .env.example to setup local env
+```bash
+$ cp .env.example .env
+```
+
+### Build docker containers
+This is for local development, which run DB (MySQL) up.
+```bash
+# docker compose build
+$ docker-compose up --build
+
+# docker compose start
+$ docker-compose up
+
+# docker compose stop
+$ docker-compose down
+
+# mysql error - initialize specified but the data directory has files in it
+$ docker container rm --volumes e-commerce-mysql
+$ docker-compose up --build
+```
+
+###  Run API server locally
+To run API locally, you have to make sure the `mysql`, `redis`(if added) is ready.
+
+```bash
+$ docker-compose up mysql
+```
+
+```bash
+# watch mode for development
+$ npm run start:dev
+$ yarn start:dev
+```
+
 ## Running the app
 
 ```bash
