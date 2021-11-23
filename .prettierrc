@@ -1,14 +1,14 @@
-module.exports = {
-  arrowParens: 'always',
-  bracketSpacing: true,
-  bracketSameLine: true,
-  jsxSingleQuote: false,
-  printWidth: 80,
-  proseWrap: 'preserve',
-  quoteProps: 'as-needed',
-  semi: true,
-  singleQuote: true,
-  tabWidth: 2,
-  trailingComma: 'all',
-  useTabs: false,
-};
+{
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": true,
+  "quoteProps": "as-needed",
+  "jsxSingleQuote": false,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "arrowParens": "always",
+  "proseWrap": "preserve"
+}
