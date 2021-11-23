@@ -5,10 +5,13 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  JoinTable,
+  ManyToMany,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 
 import { USER_STATUS } from '../enums/UserStatus';
+import { Role } from './role.entity';
 
 @Entity()
 export class User {
@@ -37,4 +40,8 @@ export class User {
 
   @DeleteDateColumn()
   deletedAt?: Date;
+
+  @ManyToMany(() => Role, { eager: true, cascade: true })
+  @JoinTable({ name: 'user_mapping_role' })
+  roles: Role[];
 }
