@@ -20,7 +20,7 @@ export const isNumber = (
       .filter((v) => v)
       .join(''),
   ).test(string);
-
+// eslint-disable-next-line prettier/prettier
 export const isPositiveInteger = (string: any) =>
   isNumber(string, 'positive', 'integer');
 

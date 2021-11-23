@@ -55,10 +55,12 @@ function getPasswordRule() {
       env.PASSWORD_RULE_HAS_SPECIAL_CHARACTER === 'true' && '(?=.*?[#?!@$%^&*-])',
       /[A-Za-z\d#?!@$%^&*-]/.source,
       '{',
+      // eslint-disable-next-line prettier/prettier
       isPositiveInteger(env.PASSWORD_RULE_MIN_LENGTH)
         ? +env.PASSWORD_RULE_MIN_LENGTH || '1'
         : '1',
       ',',
+      // eslint-disable-next-line prettier/prettier
       isPositiveInteger(env.PASSWORD_RULE_MAX_LENGTH)
         ? +env.PASSWORD_RULE_MAX_LENGTH || ''
         : '',

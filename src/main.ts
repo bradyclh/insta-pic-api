@@ -9,12 +9,13 @@ import {
   Logger,
   ValidationPipe,
 } from '@nestjs/common';
+// eslint-disable-next-line prettier/prettier
 import {
   SwaggerModule,
   DocumentBuilder,
   SwaggerCustomOptions,
 } from '@nestjs/swagger';
-// import * as bodyParse from 'body-parser';
+
 import { AppModule } from './app.module';
 import envConfig from './config/env-config';
 
