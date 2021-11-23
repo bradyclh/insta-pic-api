@@ -35,6 +35,17 @@ model.
 ```bash
 $ npm install
 ```
+## Develop
+
+### Set up husky
+To enable Git hooks
+```bash
+$ yarn husky install
+
+# If encounter problem: "The '.husky/pre-push' hook was ignored because it's not set as executable."
+# run below command
+$ chmod 777 '.husky/pre-push'
+```
 
 ## Running the app
 
