@@ -1,0 +1,26 @@
+# This is for local MacOSX use only
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0.25
+    platform: linux/x86_64
+    container_name: e-commerce-mysql
+    command:
+      [
+        'mysqld',
+        '--character-set-server=utf8mb4',
+        '--collation-server=utf8mb4_unicode_ci',
+        '--default-authentication-plugin=mysql_native_password',
+      ]
+    ports:
+      - '${DB_PORT}:${DB_PORT}'
+    volumes:
+      - data-volume:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_TCP_PORT: ${DB_PORT}
+volumes:
+  data-volume:
