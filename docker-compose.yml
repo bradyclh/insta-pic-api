@@ -4,7 +4,7 @@ services:
   mysql:
     image: mysql:8.0.25
     platform: linux/x86_64
-    container_name: e-commerce-mysql
+    container_name: insta-pic-mysql
     command:
       [
         'mysqld',
