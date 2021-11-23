@@ -53,6 +53,9 @@ Copy .env.example to setup local env
 $ cp .env.example .env
 ```
 
+### Database design
+https://dbdiagram.io/d/619cf47c02cf5d186b646848
+
 ### Build docker containers
 This is for local development, which run DB (MySQL) up.
 ```bash
