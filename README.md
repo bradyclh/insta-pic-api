@@ -69,7 +69,7 @@ $ docker-compose up
 $ docker-compose down
 
 # mysql error - initialize specified but the data directory has files in it
-$ docker container rm --volumes e-commerce-mysql
+$ docker container rm --volumes insta-pic-mysql
 $ docker-compose up --build
 ```
 
