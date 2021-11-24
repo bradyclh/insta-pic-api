@@ -30,4 +30,11 @@ export class UserController {
   signup(@Body() data: SignupDto) {
     return this.userService.signup(data);
   }
+
+  @Post('login')
+  @ApiOperation({ summary: 'login with username' })
+  @ApiResponse({ type: JWTUserResponse })
+  login(@Body() data: SignupDto) {
+    return this.userService.login(data);
+  }
 }

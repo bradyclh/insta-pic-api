@@ -1,4 +1,4 @@
-import { Injectable, ConflictException, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, ConflictException, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
@@ -67,6 +67,37 @@ export class UserService {
       throw errno === 1062
         ? new ConflictException('This account already exists')
         : new InternalServerErrorException('Failed to sign up');
+    }
+  }
+
+  async login({ username, password }: SignupDto): Promise<JWTUserResponse> {
+    try {
+      const user = await this.userRepository.findOne({ username });
+      if (
+        !user ||
+        getHash({
+          data: password,
+          salt: passwordHashSalt,
+        }) !== user?.password
+      )
+        throw new UnauthorizedException('The Account or password is not correct.');
+
+      const token = this.jwtService.sign({
+        id: user.id,
+        username: user.username,
+      });
+
+      return {
+        token,
+        user: {
+          id: user.id,
+          username: user.username,
+          status: user.status,
+        },
+      };
+    } catch (error) {
+      if (error?.status) throw error;
+      throw new InternalServerErrorException('Failed to login');
     }
   }
 }
