@@ -13,7 +13,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "lint": "eslint \"src/**/*.ts\" --max-warnings=0",
+    "lint": "eslint \"src/**/*.ts\" --max-warnings=0 --fix",
     "type-check": "tsc",
     "test": "jest --verbose",
     "test:watch": "jest --watch",
