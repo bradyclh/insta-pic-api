@@ -1,6 +1,7 @@
 import { Injectable, ConflictException, InternalServerErrorException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { JwtService } from '@nestjs/jwt';
 import { USER_STATUS } from '../enums/UserStatus';
 import { UserRepository } from '../repositories/user.repository';
 import { SignupDto } from './dto/signup.dto';
@@ -19,6 +20,7 @@ export class UserService {
     @InjectRepository(Role)
     private readonly roleRepository: Repository<Role>,
     private readonly userRepository: UserRepository,
+    private readonly jwtService: JwtService,
   ) {}
 
   async find({ limit, pageIndex, orderColumn, orderBy }: FindDto) {
@@ -51,8 +53,10 @@ export class UserService {
         roles: [role],
       });
 
+      const token = this.jwtService.sign({ id: newUser.id, username: newUser.username });
+
       return {
-        token: '',
+        token,
         user: {
           id: newUser.id,
           username: newUser.username,
