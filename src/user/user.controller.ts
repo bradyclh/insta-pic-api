@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Post, Query, Body } from '@nestjs/common';
 // eslint-disable-next-line prettier/prettier
 import {
   ApiTags,
@@ -7,8 +7,9 @@ import {
 } from '@nestjs/swagger';
 
 import { UserService } from './user.service';
-import { FindDto } from './dto/user.dto';
 import { UsersResponse } from './dto/response/users.response';
+import { FindDto } from './dto/user.dto';
+import { SignupDto } from './dto/signup.dto';
 
 @ApiTags('user')
 @Controller('user')
@@ -20,5 +21,12 @@ export class UserController {
   @ApiResponse({ type: UsersResponse })
   find(@Query() data: FindDto) {
     return this.userService.find(data);
+  }
+
+  @Post('signup')
+  @ApiOperation({ summary: 'sign up with username' })
+  @ApiResponse({ type: UsersResponse })
+  signup(@Body() data: SignupDto) {
+    return this.userService.signup(data);
   }
 }
