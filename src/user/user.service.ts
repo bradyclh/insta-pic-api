@@ -1,4 +1,9 @@
-import { Injectable, ConflictException, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  ConflictException,
+  InternalServerErrorException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
@@ -11,6 +16,7 @@ import { ROLE_TYPE } from '../enums/RoleType';
 import { getHash } from '../utils/cryptoHelper';
 import env from '../config/env-config';
 import { JWTUserResponse } from './dto/response/jwtUser.response';
+import { UserProfileResponse } from './dto/response/userProfile.response';
 
 const { passwordHashSalt } = env.key;
 
@@ -99,5 +105,9 @@ export class UserService {
       if (error?.status) throw error;
       throw new InternalServerErrorException('Failed to login');
     }
+  }
+
+  getUserProfile(id: number): Promise<UserProfileResponse> {
+    return this.userRepository.findOne(id);
   }
 }

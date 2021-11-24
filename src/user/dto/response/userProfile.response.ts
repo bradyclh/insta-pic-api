@@ -4,13 +4,12 @@ import {
   IsNotEmpty,
   IsNumber,
   IsString,
-  IsObject,
-  IsDate,
   IsEnum,
+  IsDate,
 } from 'class-validator';
 import { USER_STATUS } from '../../../enums/UserStatus';
 
-class UserResponse {
+export class UserProfileResponse {
   @ApiResponseProperty()
   @IsNotEmpty()
   @IsNumber()
@@ -40,10 +39,4 @@ class UserResponse {
   @IsNotEmpty()
   @IsDate()
   deletedAt?: Date;
-}
-
-export class UsersResponse {
-  @ApiResponseProperty()
-  @IsObject()
-  users: UserResponse[];
 }
