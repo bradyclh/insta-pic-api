@@ -10,6 +10,7 @@ import { UserService } from './user.service';
 import { UsersResponse } from './dto/response/users.response';
 import { FindDto } from './dto/user.dto';
 import { SignupDto } from './dto/signup.dto';
+import { JWTUserResponse } from './dto/response/jwtUser.response';
 
 @ApiTags('user')
 @Controller('user')
@@ -25,7 +26,7 @@ export class UserController {
 
   @Post('signup')
   @ApiOperation({ summary: 'sign up with username' })
-  @ApiResponse({ type: UsersResponse })
+  @ApiResponse({ type: JWTUserResponse })
   signup(@Body() data: SignupDto) {
     return this.userService.signup(data);
   }

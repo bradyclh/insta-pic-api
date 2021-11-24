@@ -2,11 +2,12 @@ import { ApiResponseProperty } from '@nestjs/swagger';
 // eslint-disable-next-line prettier/prettier
 import {
   IsNotEmpty,
-  IsBoolean,
   IsNumber,
   IsString,
   IsObject,
+  IsEnum,
 } from 'class-validator';
+import { USER_STATUS } from '../../../enums/UserStatus';
 
 class UserBaseResponse {
   @ApiResponseProperty()
@@ -21,8 +22,8 @@ class UserBaseResponse {
 
   @ApiResponseProperty()
   @IsNotEmpty()
-  @IsBoolean()
-  status: boolean;
+  @IsEnum(USER_STATUS)
+  status: USER_STATUS;
 }
 
 export class JWTUserResponse {

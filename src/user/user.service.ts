@@ -5,11 +5,11 @@ import { USER_STATUS } from '../enums/UserStatus';
 import { UserRepository } from '../repositories/user.repository';
 import { SignupDto } from './dto/signup.dto';
 import { FindDto } from './dto/user.dto';
-import { User } from '../entities/user.entity';
 import { Role } from '../entities/role.entity';
 import { ROLE_TYPE } from '../enums/RoleType';
 import { getHash } from '../utils/cryptoHelper';
 import env from '../config/env-config';
+import { JWTUserResponse } from './dto/response/jwtUser.response';
 
 const { passwordHashSalt } = env.key;
 
@@ -33,7 +33,7 @@ export class UserService {
     return users;
   }
 
-  async signup({ username, password }: SignupDto): Promise<User> {
+  async signup({ username, password }: SignupDto): Promise<JWTUserResponse> {
     try {
       // get default role - USER
       const role = await this.roleRepository.findOne({ role: ROLE_TYPE.USER });
@@ -44,14 +44,21 @@ export class UserService {
         salt: passwordHashSalt,
       });
 
-      const user = await this.userRepository.save({
+      const newUser = await this.userRepository.save({
         username,
         password: encryptedPassword,
         status: USER_STATUS.REGISTERED,
         roles: [role],
       });
 
-      return user;
+      return {
+        token: '',
+        user: {
+          id: newUser.id,
+          username: newUser.username,
+          status: newUser.status,
+        },
+      };
     } catch ({ errno }) {
       throw errno === 1062
         ? new ConflictException('This account already exists')
