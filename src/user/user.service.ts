@@ -1,5 +1,6 @@
 import { Injectable, ConflictException, InternalServerErrorException } from '@nestjs/common';
 import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 import { USER_STATUS } from '../enums/UserStatus';
 import { UserRepository } from '../repositories/user.repository';
 import { SignupDto } from './dto/signup.dto';
@@ -15,8 +16,9 @@ const { passwordHashSalt } = env.key;
 @Injectable()
 export class UserService {
   constructor(
-    private readonly userRepository: UserRepository,
+    @InjectRepository(Role)
     private readonly roleRepository: Repository<Role>,
+    private readonly userRepository: UserRepository,
   ) {}
 
   async find({ limit, pageIndex, orderColumn, orderBy }: FindDto) {
